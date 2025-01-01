@@ -8,16 +8,16 @@ const router = express.Router();
 
 const JWT_SECRET = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjEsIkVtYWlsVXNlciI6ImpvaG5AZXhhbXBsZS5jb20iLCJpYXQiOjE3MzU1OTg2ODQsImV4cCI6MTczNTYwMjI4NH0.pSHzyW_h7RnocvBSYO6EhwEBfU0jhXmg1nzvpUp4WpM';
 const JWT_EXPIRES = '1h';
+// Login page
+router.get('/login', (req, res) => {
+  res.render('login', { title: 'Login', appName: 'FitMagique' });
+});
 
+// Register page
 router.get('/register', (req, res) => {
-    res.render('register'); // Ensure you have a 'register.ejs' in the views folder
-  });
-  
-  router.get('/register', (req, res) => {
-    res.render('register', { title: 'User Registration', appName: 'FitMagique' });
-  });
-  
-  
+  res.render('register', { title: 'Register', appName: 'FitMagique' });
+});
+
 // Register a new user
 router.post('/register', async (req, res) => {
   const { idUser, NameUser, sexeUser, EmailUser, roleUser, telUser, adressUser, password } = req.body;

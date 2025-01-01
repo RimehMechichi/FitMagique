@@ -47,18 +47,16 @@ app.use(function (req, res, next) {
 });
 
 // Error handler
-app.use(function (err, req, res, next) {
-  // Set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // Render the error page
-  res.status(err.status || 500);
-  res.render('error');
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500).json({
+    message: err.message,
+    details: err.stack || err.details
+  });
 });
 
+
 // Start the server
-const PORT = 3000;
+const PORT = 3001;
 app.listen(PORT, () => console.log(`User service running on port ${PORT}`));
 
 module.exports = app;
