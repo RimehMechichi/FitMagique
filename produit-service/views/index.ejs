@@ -3,22 +3,82 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All Produits</title>
+  <title>All Products</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      color: #4CAF50;
+      margin-bottom: 20px;
+    }
+    a {
+      display: inline-block;
+      margin-bottom: 20px;
+      padding: 10px 15px;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    a:hover {
+      background-color: #45a049;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      background: white;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 5px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    button {
+      padding: 5px 10px;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #c0392b;
+    }
+    .actions {
+      display: flex;
+      gap: 10px;
+    }
+  </style>
 </head>
 <body>
-  <h1>All Produits</h1>
-  <a href="/produits/new">Add New Produit</a>
+
+  <h1>All Products</h1>
+  <a href="/produits/new">Add New Product</a>
+
   <ul>
     <% produits.forEach(produit => { %>
       <li>
-        <%= produit.Nomproduit %> - <%= produit.Quantite %> available 
-        (<%= produit.etatp %>)
-        <a href="/produits/<%= produit._id %>/edit">Edit</a> | 
-        <form action="/produits/<%= produit._id %>/delete" method="POST" style="display:inline;">
-          <button type="submit">Delete</button>
-        </form>
+        <div>
+          <strong><%= produit.Nomproduit %></strong> - <%= produit.Quantite %> available 
+          (<%= produit.etatp %>)
+        </div>
+        <div class="actions">
+          <a href="/produits/<%= produit._id %>/edit">Edit</a>
+          <form action="/produits/<%= produit._id %>/delete" method="POST" style="display:inline;">
+            <button type="submit">Delete</button>
+          </form>
+        </div>
       </li>
     <% }) %>
   </ul>
+
 </body>
 </html>
