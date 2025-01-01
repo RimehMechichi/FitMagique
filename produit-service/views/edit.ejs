@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Produit</title>
+</head>
+<body>
+  <h1>Edit Produit</h1>
+  <form action="/produits/<%= produit._id %>" method="POST">
+    <div>
+      <label for="Refproduit">Reference:</label>
+      <input type="text" id="Refproduit" name="Refproduit" value="<%= produit.Refproduit %>" required>
+    </div>
+    <div>
+      <label for="Nomproduit">Name:</label>
+      <input type="text" id="Nomproduit" name="Nomproduit" value="<%= produit.Nomproduit %>" required>
+    </div>
+    <div>
+      <label for="Description">Description:</label>
+      <input type="text" id="Description" name="Description" value="<%= produit.Description %>" required>
+    </div>
+    <div>
+      <label for="Quantite">Quantity:</label>
+      <input type="number" id="Quantite" name="Quantite" value="<%= produit.Quantite %>" required>
+    </div>
+    <div>
+      <label for="typep">Type:</label>
+      <input type="text" id="typep" name="typep" value="<%= produit.typep %>" required>
+    </div>
+    <div>
+      <label for="etatp">State:</label>
+      <input type="text" id="etatp" name="etatp" value="<%= produit.etatp %>" required>
+    </div>
+    <button type="submit">Save Changes</button>
+  </form>
+</body>
+</html>

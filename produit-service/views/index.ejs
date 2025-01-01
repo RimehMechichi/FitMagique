@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Produits</title>
+</head>
+<body>
+  <h1>All Produits</h1>
+  <a href="/produits/new">Add New Produit</a>
+  <ul>
+    <% produits.forEach(produit => { %>
+      <li>
+        <%= produit.Nomproduit %> - <%= produit.Quantite %> available 
+        (<%= produit.etatp %>)
+        <a href="/produits/<%= produit._id %>/edit">Edit</a> | 
+        <form action="/produits/<%= produit._id %>/delete" method="POST" style="display:inline;">
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+    <% }) %>
+  </ul>
+</body>
+</html>
