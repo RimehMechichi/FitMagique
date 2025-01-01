@@ -132,4 +132,67 @@ router.post('/reset-password/:token', async (req, res) => {
   }
 });
 
+// View Profile
+router.get('/profile', async (req, res) => {
+  const token = req.headers['authorization'];
+
+  if (!token) {
+    return res.status(401).json({ error: 'No token provided' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const user = await User.findOne({ idUser: decoded.idUser });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Return user profile details
+    res.json({
+      idUser: user.idUser,
+      NameUser: user.NameUser,
+      sexeUser: user.sexeUser,
+      EmailUser: user.EmailUser,
+      roleUser: user.roleUser,
+      telUser: user.telUser,
+      adressUser: user.adressUser,
+    });
+  } catch (err) {
+    res.status(500).json({ error: 'Error fetching profile', details: err.message });
+  }
+});
+
+// Edit Profile
+router.put('/profile', async (req, res) => {
+  const token = req.headers['authorization'];
+  const { NameUser, sexeUser, telUser, adressUser } = req.body;
+
+  if (!token) {
+    return res.status(401).json({ error: 'No token provided' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const user = await User.findOne({ idUser: decoded.idUser });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Update user profile
+    user.NameUser = NameUser || user.NameUser;
+    user.sexeUser = sexeUser || user.sexeUser;
+    user.telUser = telUser || user.telUser;
+    user.adressUser = adressUser || user.adressUser;
+
+    await user.save();
+
+    res.json({ message: 'Profile updated successfully' });
+  } catch (err) {
+    res.status(500).json({ error: 'Error updating profile', details: err.message });
+  }
+});
+
+
 module.exports = router;
