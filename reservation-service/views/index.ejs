@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservations</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1>All Reservations</h1>
+
+    <a href="/reservations/new">Add a New Reservation</a>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Reservation ID</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>User</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% reservations.forEach(reservation => { %>
+                <tr>
+                    <td><%= reservation.id_reservation %></td>
+                    <td><%= reservation.DateR.toISOString().split('T')[0] %></td> <!-- Date format -->
+                    <td><%= reservation.horaire %></td>
+                    <td>
+                        <%= reservation.id_User ? reservation.id_User.username : 'No user' %> <!-- Display user name -->
+                    </td>
+                    <td>
+                        <a href="/reservations/<%= reservation._id %>/edit">Edit</a>
+                        <form action="/reservations/<%= reservation._id %>/delete" method="POST" style="display:inline;">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+
+</body>
+</html>

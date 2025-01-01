@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event List</title>
+</head>
+<body>
+    <h1>List of Events</h1>
+    <a href="/events/new">Add a New Event</a>
+    <ul>
+        <% events.forEach(function(event) { %>
+            <li>
+                <h2><%= event.Nom_event %></h2>
+                <p>Type: <%= event.typeEvent %></p>
+                <p>Date: <%= event.Date_event.toDateString() %></p>
+                <p>Tarif: <%= event.Tarif %> €</p>
+                <p>Participants: <%= event.nbr_participants %></p>
+                <a href="/events/<%= event._id %>/edit">Edit</a>
+                <form action="/events/<%= event._id %>/delete" method="POST">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>

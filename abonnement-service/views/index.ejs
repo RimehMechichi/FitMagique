@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Abonnements</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1>All Abonnements</h1>
+
+    <a href="/abonnements/new">Add a New Abonnement</a>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Abonnement ID</th>
+                <th>Type</th>
+                <th>Payment Type</th>
+                <th>Amount</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>User</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% abonnements.forEach(abonnement => { %>
+                <tr>
+                    <td><%= abonnement.id_abon %></td>
+                    <td><%= abonnement.type_abon %></td>
+                    <td><%= abonnement.type_paiemment %></td>
+                    <td><%= abonnement.montant %></td>
+                    <td><%= abonnement.dateDeb.toISOString().split('T')[0] %></td> <!-- Start Date -->
+                    <td><%= abonnement.dateFin.toISOString().split('T')[0] %></td> <!-- End Date -->
+                    <td>
+                        <%= abonnement.id_User ? abonnement.id_User.username : 'No user' %> <!-- Display user name -->
+                    </td>
+                    <td>
+                        <a href="/abonnements/<%= abonnement._id %>/edit">Edit</a>
+                        <form action="/abonnements/<%= abonnement._id %>/delete" method="POST" style="display:inline;">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+
+</body>
+</html>

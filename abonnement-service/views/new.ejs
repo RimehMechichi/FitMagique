@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Abonnement</title>
+</head>
+<body>
+
+    <h1>Add a New Abonnement</h1>
+
+    <form action="/abonnements" method="POST">
+        <label for="id_abon">Abonnement ID:</label>
+        <input type="text" name="id_abon" required><br>
+
+        <label for="type_abon">Type:</label>
+        <input type="text" name="type_abon" required><br>
+
+        <label for="type_paiemment">Payment Type:</label>
+        <input type="text" name="type_paiemment" required><br>
+
+        <label for="montant">Amount:</label>
+        <input type="number" name="montant" required><br>
+
+        <label for="dateDeb">Start Date:</label>
+        <input type="date" name="dateDeb" required><br>
+
+        <label for="dateFin">End Date:</label>
+        <input type="date" name="dateFin" required><br>
+
+        <label for="id_user">User:</label>
+        <select name="id_user" required>
+            <% users.forEach(user => { %>
+                <option value="<%= user._id %>"><%= user.username %></option>
+            <% }) %>
+        </select><br>
+
+        <button type="submit">Add Abonnement</button>
+    </form>
+
+</body>
+</html>

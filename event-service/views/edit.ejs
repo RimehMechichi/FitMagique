@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Event</title>
+</head>
+<body>
+    <h1>Edit Event</h1>
+    <form action="/events/<%= event._id %>" method="POST">
+        <div>
+            <label for="typeEvent">Event Type:</label>
+            <input type="text" id="typeEvent" name="typeEvent" value="<%= event.typeEvent %>" required>
+        </div>
+        <div>
+            <label for="Nom_event">Event Name:</label>
+            <input type="text" id="Nom_event" name="Nom_event" value="<%= event.Nom_event %>" required>
+        </div>
+        <div>
+            <label for="Date_event">Event Date:</label>
+            <input type="date" id="Date_event" name="Date_event" value="<%= event.Date_event.toISOString().split('T')[0] %>" required>
+        </div>
+        <div>
+            <label for="Tarif">Event Price:</label>
+            <input type="number" id="Tarif" name="Tarif" value="<%= event.Tarif %>" required>
+        </div>
+        <div>
+            <label for="nbr_participants">Number of Participants:</label>
+            <input type="number" id="nbr_participants" name="nbr_participants" value="<%= event.nbr_participants %>">
+        </div>
+        <div>
+            <label for="id_User">User ID:</label>
+            <input type="number" id="id_User" name="id_User" value="<%= event.id_User %>" required>
+        </div>
+        <div>
+            <button type="submit">Update Event</button>
+        </div>
+    </form>
+</body>
+</html>
