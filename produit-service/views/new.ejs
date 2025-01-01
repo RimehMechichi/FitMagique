@@ -55,33 +55,31 @@
 
   <h1>Add New Product</h1>
   
-  <form action="/produits" method="POST">
-    <div>
-      <label for="Refproduit">Reference:</label>
-      <input type="text" id="Refproduit" name="Refproduit" required>
-    </div>
-    <div>
-      <label for="Nomproduit">Name:</label>
-      <input type="text" id="Nomproduit" name="Nomproduit" required>
-    </div>
-    <div>
-      <label for="Description">Description:</label>
-      <input type="text" id="Description" name="Description" required>
-    </div>
-    <div>
-      <label for="Quantite">Quantity:</label>
-      <input type="number" id="Quantite" name="Quantite" required>
-    </div>
-    <div>
-      <label for="typep">Type:</label>
-      <input type="text" id="typep" name="typep" required>
-    </div>
-    <div>
-      <label for="etatp">State:</label>
-      <input type="text" id="etatp" name="etatp" required>
-    </div>
+  <form action="/produits" method="POST" enctype="multipart/form-data">
+    <label for="Refproduit">Refproduit:</label>
+    <input type="text" name="Refproduit" required><br><br>
+  
+    <label for="Nomproduit">Nomproduit:</label>
+    <input type="text" name="Nomproduit" required><br><br>
+  
+    <label for="Description">Description:</label>
+    <textarea name="Description" required></textarea><br><br>
+  
+    <label for="Quantite">Quantite:</label>
+    <input type="number" name="Quantite" required><br><br>
+  
+    <label for="typep">Type:</label>
+    <input type="text" name="typep" required><br><br>
+  
+    <label for="etatp">Etat:</label>
+    <input type="text" name="etatp" required><br><br>
+  
+    <label for="images">Product Images:</label>
+    <input type="file" name="images" accept="image/*" multiple><br><br>
+  
     <button type="submit">Add Product</button>
   </form>
+  
 
 </body>
 </html>

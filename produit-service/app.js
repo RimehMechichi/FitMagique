@@ -2,7 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
-const produitRoutes = require('./routes/produit'); // Import the produit routes
+const produitRoutes = require('./routes/produit');
+const multer = require('multer');  
 
 const app = express();
 
@@ -11,6 +12,10 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
+app.use('/public', express.static(path.join(__dirname, 'public')));
+
+// Use the routes
+app.use('/', produitRoutes); // Apply routes here, no need to pass the multer upload globally
 
 // Connect to MongoDB
 mongoose.connect('mongodb://127.0.0.1:27017/produitDB', {
@@ -22,7 +27,4 @@ mongoose.connect('mongodb://127.0.0.1:27017/produitDB', {
   console.error('Error connecting to MongoDB:', err.message);
 });
 
-// Use the routes
-app.use(produitRoutes);
-
-module.exports = app;  // Export the app for use in server.js
+module.exports = app;
