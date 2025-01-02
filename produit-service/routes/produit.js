@@ -44,6 +44,12 @@ const upload = multer({
   fileFilter: fileFilter
 });
 
+// Route to render the new product form
+router.get('/produits/new', (req, res) => {
+  res.render('new'); // Ensure you have a 'new_produit.ejs' template in your views folder
+});
+
+
 // Route for creating a new product with image upload
 router.post('/produits', upload.array('images', 5), async (req, res) => {
   try {
@@ -59,6 +65,7 @@ router.post('/produits', upload.array('images', 5), async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
+
 
 // Route for updating a product with image upload
 router.put('/produits/:id', upload.array('images', 5), async (req, res) => {
@@ -77,6 +84,21 @@ router.put('/produits/:id', upload.array('images', 5), async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
+
+// Route for rendering the edit product form
+router.get('/produits/:id/edit', async (req, res) => {
+  try {
+    const produit = await Produit.findById(req.params.id);
+    if (!produit) {
+      return res.status(404).send('Produit not found.');
+    }
+    res.render('edit', { produit });
+  } catch (err) {
+    console.error('Error fetching the produit for editing:', err);
+    res.status(500).send('Unable to load the edit form.');
+  }
+});
+
 
 // Delete a product
 router.delete('/produits/:id', async (req, res) => {

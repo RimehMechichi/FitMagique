@@ -97,7 +97,7 @@ app.get('/events/:id/edit', async (req, res) => {
     if (!event) {
       return res.status(404).send('Event not found.');
     }
-    res.render('edit_event', { event });
+    res.render('edit', { event });
   } catch (err) {
     console.error('Error retrieving the event for editing:', err);
     res.status(500).send('Error retrieving the event.');

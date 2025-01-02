@@ -36,7 +36,20 @@ app.get('/abonnements', async (req, res) => {
   }
 });
 
-app.post('/abonnements', async (req, res) => {
+// Add new Abonnement
+app.get('/abonnements/new', async (req, res) => {
+  try {
+    // Fetch users from the database to populate the dropdown
+    const users = await User.find();
+    res.render('new', { users });
+  } catch (err) {
+    console.error('Error fetching users for the form:', err);
+    res.status(500).send('Unable to load the form.');
+  }
+});
+
+
+app.post('/abonnements/new', async (req, res) => {
   console.log('Request Body:', req.body);  // Log the full body to inspect the fields
   console.log('Checking for missing fields:');
   console.log({
@@ -74,6 +87,7 @@ app.post('/abonnements', async (req, res) => {
 });
 
 // Update an Abon
+
 app.post('/abonnements/:id', async (req, res) => {
   const { type_abon, type_paiemment, montant, dateDeb, dateFin, id_user } = req.body;
 
@@ -91,6 +105,23 @@ app.post('/abonnements/:id', async (req, res) => {
     res.status(500).send('Error updating the abon.');
   }
 });
+app.get('/abonnements/:id/edit', async (req, res) => {
+  try {
+    const abon = await Abon.findById(req.params.id);
+    if (!abon) {
+      return res.status(404).send('Abon not found.');
+    }
+
+    // Fetch users to populate the dropdown
+    const users = await User.find();
+
+    res.render('edit', { abon, users });
+  } catch (err) {
+    console.error('Error fetching the abonnement for editing:', err);
+    res.status(500).send('Unable to load the edit form.');
+  }
+});
+
 
 
 // Delete an Abon
